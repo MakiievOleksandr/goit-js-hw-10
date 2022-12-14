@@ -1,9 +1,9 @@
 import debounce from 'lodash.debounce';
 import './css/styles.css';
 import Notiflix from 'notiflix';
-import { fetchCountries } from '../fetchCountries';
-import { markupCountries } from '../markups';
-import { markupCountry } from '../markups';
+import { fetchCountries } from './fetchCountries';
+import { markupCountries } from './markups';
+import { markupCountry } from './markups';
 
 const DEBOUNCE_DELAY = 300;
 
@@ -31,6 +31,7 @@ refs.input.addEventListener(
       .catch(error => {
         Notiflix.Notify.failure('Oops, there is no country with that name');
         refs.listEl.innerHTML = '';
+        refs.infoEl.innerHTML = '';
       });
   }, DEBOUNCE_DELAY)
 );
@@ -42,7 +43,7 @@ function renderCountry(mainData) {
     );
     refs.listEl.innerHTML = '';
     return;
-  } else if (mainData.length == 1) {
+  } else if (mainData.length === 1) {
     const markupRenderCountry = markupCountry(mainData[0]);
     refs.infoEl.innerHTML = markupRenderCountry;
     refs.listEl.innerHTML = '';
